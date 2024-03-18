@@ -3,11 +3,15 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"prj-1-gr4/domain"
 	"strconv"
 	"time"
 )
 
-var points int = 20
+var (
+	id     uint64 = 1
+	points int    = 20
+)
 
 const pointsPerQuestion = 5
 
@@ -15,6 +19,31 @@ func main() {
 	fmt.Println("Привіт, вітаємо у грі!")
 	time.Sleep(1 * time.Second)
 
+	for {
+		menu()
+		punct := ""
+		fmt.Scan(&punct)
+
+		switch punct {
+		case "1":
+			play()
+		case "2":
+			fmt.Println("Рейтинг в розробці")
+		case "3":
+			return
+		default:
+			fmt.Println("Зробіть правильний вибір")
+		}
+	}
+}
+
+func menu() {
+	fmt.Println("1. Почати гру")
+	fmt.Println("2. Переглянути рейтинг")
+	fmt.Println("3. Вийти")
+}
+
+func play() domain.User {
 	for i := 5; i > 1; i-- {
 		fmt.Printf("До початку: %v", i)
 		time.Sleep(1 * time.Second)
@@ -48,5 +77,18 @@ func main() {
 	timeSpent := end.Sub(start)
 
 	fmt.Printf("Вітаю, ти впорався за %v", timeSpent)
-	time.Sleep(10 * time.Second)
+
+	fmt.Println("Введіть своє ім'я:")
+
+	name := ""
+	fmt.Scan(&name)
+
+	user := domain.User{
+		Id:   id,
+		Name: name,
+		Time: timeSpent,
+	}
+	id++
+
+	return user
 }
