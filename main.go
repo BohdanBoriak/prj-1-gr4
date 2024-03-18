@@ -31,7 +31,9 @@ func main() {
 			u := play()
 			users = append(users, u)
 		case "2":
-			fmt.Println("Рейтинг в розробці")
+			for _, user := range users {
+				fmt.Printf("Name: %s, Time: %v", user.Name, user.Time)
+			}
 		case "3":
 			return
 		default:
