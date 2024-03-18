@@ -19,6 +19,8 @@ func main() {
 	fmt.Println("Привіт, вітаємо у грі!")
 	time.Sleep(1 * time.Second)
 
+	var users []domain.User
+
 	for {
 		menu()
 		punct := ""
@@ -26,7 +28,8 @@ func main() {
 
 		switch punct {
 		case "1":
-			play()
+			u := play()
+			users = append(users, u)
 		case "2":
 			fmt.Println("Рейтинг в розробці")
 		case "3":
